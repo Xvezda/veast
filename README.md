@@ -23,6 +23,7 @@ e.g. vim-plug
 call plug#begin()
 Plug 'Xvezda/vim-veast'
 " ...
+call plug#end()
 ```
 
 ### Include
