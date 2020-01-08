@@ -1,0 +1,6 @@
+Include: common.vader
+
+Execute (each basic test):
+  let arr = [2, 3, 4]
+  Assert veast#each(arr, 'pow(g:veast.val, 2)') == [4.0, 9.0, 16.0]
+
