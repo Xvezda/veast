@@ -102,7 +102,7 @@ function! veast#chunk(arr, ...) abort
   let tmp = []
   let size_cpy = size
 
-  for item in a:arr
+  for item in s:iter(a:arr)
     if size_cpy > 0
       call add(tmp, item)
     else
