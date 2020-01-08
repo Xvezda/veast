@@ -35,3 +35,8 @@ runtime! autoload/veast.vim
 ## Test
 
 `make test`
+
+
+## Use case
+
+* [vim-nobin](https://github.com/Xvezda/vim-nobin)
