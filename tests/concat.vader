@@ -1,0 +1,11 @@
+Include: common.vader
+
+Execute (concat function implementation test):
+  let arr = []
+
+  call veast#concat(arr, 1, 2, 3)
+  Assert arr == [1, 2, 3]
+
+  call veast#concat(arr, [1, 2, 3])
+  Assert arr == [1, 2, 3, 1, 2, 3]
+
