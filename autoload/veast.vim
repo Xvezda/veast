@@ -17,14 +17,17 @@ endif
 let g:loaded_veast = 1
 
 
-if exists('g:veast')
-  let g:veast = g:veast
-else
-  let g:veast = {
-        \ 'val': 0,
-        \ }
-endif
-lockvar! g:veast
+function! s:iter(expr) abort
+  if type(a:expr) == type([])
+    return a:expr
+  elseif type(a:expr) == type({})
+    return values(a:expr)
+  elseif type(a:expr) == type("")
+    return split(a:expr, '\zs')
+  endif
+  throw 'argument `expr` is not iterable type'
+endfunction
+
 
 function! veast#every(...) abort
   for i in range(a:0)
@@ -77,44 +80,43 @@ endfunction
 
 
 function! veast#each(iter, expr) abort
-  if type(a:iter) == type([])
-    let iter_ = a:iter
-  elseif type(a:iter) == type({})
-    let iter_ = values(a:iter)
-  elseif type(a:iter) == type("")
-    let iter_ = split(a:iter, '\zs')
-  else
-    throw 'argument `iter` is not iterable type'
-  endif
-
   let ret = []
 
-  unlockvar! g:veast
-  for val in iter_
-    let g:veast.val = val
+  for val in s:iter(a:iter)
     call add(ret, eval(a:expr))
   endfor
-  lockvar! g:veast
 
   return ret
 endfunction
 
 
-function! veast#apply(iter, func) abort
-  if type(a:iter) == type([])
-    for a:item in iter
-      call a:func(item)
-    endfor
-  elseif type(a:iter) == type({})
-    for item in values(a:iter)
-      call a:func(item)
-    endfor
-  elseif type(a:iter) == type("")
-    for item in split(a:iter, '\zs')
-      call a:func(item)
-    endfor
+function! veast#chunk(arr, ...) abort
+  let ret = []
+  " a:0 -> Number of va_args
+  if a:0 == 1
+    let size = a:000[0]  " a:000 -> va_args only"
   else
-    throw 'argument `iter` is not iterable type'
+    let size = 1
   endif
+
+  let tmp = []
+  let size_cpy = size
+
+  for item in a:arr
+    if size_cpy > 0
+      call add(tmp, item)
+    else
+      call add(ret, tmp)
+      let tmp = [item]
+      let size_cpy = size
+    endif
+    let size_cpy -= 1
+  endfor
+  if !empty(tmp)
+    call add(ret, tmp)
+  endif
+  return ret
 endfunction
 
+
+" vim:sts=2
