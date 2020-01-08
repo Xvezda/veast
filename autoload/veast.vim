@@ -10,6 +10,13 @@
 " Maintainer:   Xvezda <https://xvezda.com/>
 
 
+" Source guard
+if exists('g:loaded_veast')
+  finish
+endif
+let g:loaded_veast = 1
+
+
 function! veast#every(...) abort
   let flag = 1
   for i in range(a:0)
