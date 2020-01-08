@@ -35,6 +35,8 @@ runtime! autoload/veast.vim
 
 ## Test
 
+[vader.vim](https://github.com/junegunn/vader.vim) required
+
 `make test`
 
 
