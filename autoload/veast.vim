@@ -18,60 +18,52 @@ let g:loaded_veast = 1
 
 
 function! veast#every(...) abort
-  let flag = 1
   for i in range(a:0)
     let expr = a:000[i]
     if type(expr) == type([])
       for subexpr in expr
         if !veast#every(subexpr)
-          let flag = 0
-          break
+          return 0
         endif
       endfor
     elseif type(expr) == type("")
       if !eval(expr)
-        let flag = 0
-        break
+        return 0
       endif
     elseif type(expr) == type({})
       throw 'argument `expr` cannot be dictionary type'
     else
       if !expr
-        let flag = 0
-        break
+        return 0
       endif
     endif
   endfor
-  return flag
+  return 1
 endfunction
 
 
 function! veast#some(...) abort
-  let flag = 0
   for i in range(a:0)
     let expr = a:000[i]
     if type(expr) == type([])
       for subexpr in expr
         if veast#some(subexpr)
-          let flag = 1
-          break
+          return 1
         endif
       endfor
     elseif type(expr) == type("")
       if eval(expr)
-        let flag = 1
-        break
+        return 1
       endif
     elseif type(expr) == type({})
       throw 'argument `expr` cannot be dictionary type'
     else
       if expr
-        let flag = 1
-        break
+        return 1
       endif
     endif
   endfor
-  return flag
+  return 0
 endfunction
 
 

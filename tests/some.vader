@@ -24,7 +24,7 @@ Execute (some nested list test):
   Assert veast#some([1, [1, 0, 1], 1], [1 == 1, 1 == 1]) == 1
 
   Assert veast#some([0, [1, 0, 0], 0], [0 == 0, 0 == 0]) == 1
-  Assert veast#some([0, [0, 0, 0], 0], [0 == 0, 0 == 0]) == 1
+  Assert veast#some([0, [0, 0, 0], 0], [1 == 0, 1 == 0]) == 0
 
 
 Execute (some function exception test):
