@@ -67,21 +67,3 @@ function! veast#some(...) abort
 endfunction
 
 
-function! veast#concat(list, ...) abort
-  for i in range(a:0)
-    let item = a:000[i]
-    if type(item) == type([])
-      " Alias
-      let items = item
-      unlet item
-
-      for item in items
-        call veast#concat(a:list, item)
-      endfor
-    else
-      call add(a:list, item)
-    endif
-  endfor
-endfunction
-
-
