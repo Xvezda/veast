@@ -1,5 +1,6 @@
 filetype off
-let &runtimepath .= ','.expand('<sfile>:p:h:h')
+set rtp+=~/.vim/plugged/vader.vim
+set rtp+=../
 filetype plugin indent on
 syntax enable
 set nomore
