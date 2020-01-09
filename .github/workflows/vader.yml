@@ -1,0 +1,16 @@
+name: Vim CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone repository
+      uses: actions/checkout@master
+      
+    - name: Run unit test
+      run: make test
+      shell: bash
