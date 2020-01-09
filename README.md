@@ -1,4 +1,5 @@
 # veast.vim
+[![Action Status](https://github.com/Xvezda/vim-veast/workflows/Vim%20CI/badge.svg)](https://github.com/Xvezda/vim-veast/actions)
 
 Veast is a library for vim script.
 It contains useful helper functions, which provides efficient way to writing vim plugins.
