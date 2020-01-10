@@ -2,11 +2,11 @@ Include: common.vader
 
 Execute (each list test):
   let arr = [2, 3, 4]
-  Assert veast#each(arr, 'pow(val, 2)') == [4.0, 9.0, 16.0]
+  AssertEqual veast#each(arr, 'pow(val, 2)'), [4.0, 9.0, 16.0]
 
 Execute (each string test):
-  Assert veast#each("hello", 'char2nr(val, 2)') == [104, 101, 108, 108, 111]
+  AssertEqual veast#each("hello", 'char2nr(val, 2)'), [104, 101, 108, 108, 111]
 
 Execute (each dict test):
-  Assert veast#each({'a': 'foo', 'b': 'bar'}, 'val . " :)"') == ['foo :)', 'bar :)']
+  AssertEqual veast#each({'a': 'foo', 'b': 'bar'}, 'val . " :)"'), ['foo :)', 'bar :)']
 
