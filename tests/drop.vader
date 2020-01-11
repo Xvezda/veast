@@ -1,7 +1,8 @@
 Include: common.vader
 
 Execute (basic drop test):
-  AssertEqual veast#drop([1, 2, 3]), [1, 2, 3]
+  AssertEqual veast#drop([1, 2, 3]), [2, 3]
   AssertEqual veast#drop([1, 2, 3], 1), [2, 3]
+  AssertEqual veast#drop([1, 2, 3], 2), [3]
   AssertEqual veast#drop([1, 2, 3], 5), []
   AssertEqual veast#drop([1, 2, 3], 0), [1, 2, 3]

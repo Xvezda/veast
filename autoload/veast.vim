@@ -200,7 +200,7 @@ function! veast#drop(arr, ...) abort
   if a:0 == 1
     let cnt = a:000[0]
   else
-    let cnt = 0
+    let cnt = 1
   endif
   let cpy = deepcopy(a:arr)
   for _ in range(cnt)
