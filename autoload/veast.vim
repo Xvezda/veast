@@ -163,4 +163,17 @@ function! veast#compact(arr) abort
 endfunction
 
 
+function! veast#diff(a, b) abort
+  let a_cpy = deepcopy(a:a)
+  for b_item in s:iter(a:b)
+    let idx = index(a_cpy, b_item)
+    if idx == -1
+      continue
+    endif
+    call remove(a_cpy, idx)
+  endfor
+  return a_cpy
+endfunction
+
+
 " vim:sts=2

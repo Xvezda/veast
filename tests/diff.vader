@@ -1,0 +1,4 @@
+Include: common.vader
+
+Execute (basic diff test):
+  AssertEqual veast#diff([2, 3, 4], [1, 3]), [2, 4]
