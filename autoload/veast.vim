@@ -195,4 +195,21 @@ function! veast#concat(...) abort
   return ret
 endfunction
 
+
+function! veast#drop(arr, ...) abort
+  if a:0 == 1
+    let cnt = a:000[0]
+  else
+    let cnt = 0
+  endif
+  let cpy = deepcopy(a:arr)
+  for _ in range(cnt)
+    if empty(cpy)
+      break
+    endif
+    call remove(cpy, 0)
+  endfor
+  return cpy
+endfunction
+
 " vim:sts=2
