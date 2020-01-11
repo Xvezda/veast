@@ -1,0 +1,9 @@
+Include: common.vader
+
+Execute (basic concat test):
+  let arr = [1, 2, 3]
+  AssertEqual veast#concat(arr, [4, 5]), [1, 2, 3, 4, 5]
+- immutable
+  AssertEqual arr, [1, 2, 3]
+  AssertEqual veast#concat(arr, 4, 5), [1, 2, 3, 4, 5]
+

@@ -176,4 +176,23 @@ function! veast#diff(a, b) abort
 endfunction
 
 
+function! veast#concat(...) abort
+  let ret = []
+  for i in range(a:0)
+    let item = a:000[i]
+    if type(item) == type([])
+      " Alias
+      let items = item
+      unlet item
+
+      for item in items
+        call add(ret, item)
+      endfor
+    else
+      call add(ret, item)
+    endif
+  endfor
+  return ret
+endfunction
+
 " vim:sts=2
