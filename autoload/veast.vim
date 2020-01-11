@@ -8,6 +8,7 @@
 "
 " Location:     autoload/veast.vim
 " Maintainer:   Xvezda <https://xvezda.com/>
+" Last Change:	2020 Jan 11
 
 
 " Source guard
