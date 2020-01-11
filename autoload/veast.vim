@@ -17,12 +17,32 @@ endif
 let g:loaded_veast = 1
 
 
+function! s:is_list(expr) abort
+  return type(a:expr) == type([])
+endfunction
+
+
+function! s:is_dict(expr) abort
+  return type(a:expr) == type({})
+endfunction
+
+
+function! s:is_str(expr) abort
+  return type(a:expr) == type("")
+endfunction
+
+
+function! s:is_func(expr) abort
+  return type(a:expr) == type(function("tr"))
+endfunction
+
+
 function! s:iter(expr) abort
-  if type(a:expr) == type([])
+  if s:is_list(a:expr)
     return a:expr
-  elseif type(a:expr) == type({})
+  elseif s:is_dict(a:expr)
     return values(a:expr)
-  elseif type(a:expr) == type("")
+  elseif s:is_str(a:expr)
     return split(a:expr, '\zs')
   endif
   throw 'argument `expr` is not iterable type'
@@ -32,17 +52,17 @@ endfunction
 function! veast#every(...) abort
   for i in range(a:0)
     let expr = a:000[i]
-    if type(expr) == type([])
+    if s:is_list(expr)
       for subexpr in expr
         if !veast#every(subexpr)
           return 0
         endif
       endfor
-    elseif type(expr) == type("")
+    elseif s:is_str(expr)
       if !eval(expr)
         return 0
       endif
-    elseif type(expr) == type({})
+    elseif s:is_dict(expr)
       throw 'argument `expr` cannot be dictionary type'
     else
       if !expr
@@ -57,17 +77,17 @@ endfunction
 function! veast#some(...) abort
   for i in range(a:0)
     let expr = a:000[i]
-    if type(expr) == type([])
+    if s:is_list(expr)
       for subexpr in expr
         if veast#some(subexpr)
           return 1
         endif
       endfor
-    elseif type(expr) == type("")
+    elseif s:is_str(expr)
       if eval(expr)
         return 1
       endif
-    elseif type(expr) == type({})
+    elseif s:is_dict(expr)
       throw 'argument `expr` cannot be dictionary type'
     else
       if expr
@@ -116,6 +136,30 @@ function! veast#chunk(arr, ...) abort
     call add(ret, tmp)
   endif
   return ret
+endfunction
+
+
+function! veast#compact(arr) abort
+  if s:is_list(a:arr)
+    let ret = []
+    for item in a:arr
+      let flag = 0
+      if s:is_str(item) && strlen(item)
+        let flag = 1
+      elseif (s:is_list(item) || s:is_dict(item)) && len(item)
+        let flag = 1
+      elseif item
+        let flag = 1
+      endif
+
+      if flag
+        call add(ret, item)
+      endif
+    endfor
+    return ret
+  else
+    throw 'argument `arr` must be type of list'
+  endif
 endfunction
 
 
