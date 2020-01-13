@@ -213,4 +213,23 @@ function! veast#drop(arr, ...) abort
   return cpy
 endfunction
 
+
+function! veast#fill(arr, value, ...) abort
+  if a:0 == 1
+    let start = a:000[0]
+    let end = len(a:arr)
+  elseif a:0 == 2
+    let start = a:000[0]
+    let end = a:000[1]
+  else
+    let start = 0
+    let end = len(a:arr)
+  endif
+  for i in range(start, end-1)
+    let a:arr[i] = a:value
+  endfor
+  return a:arr
+endfunction
+
+
 " vim:sts=2
