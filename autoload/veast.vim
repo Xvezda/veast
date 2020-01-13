@@ -232,4 +232,23 @@ function! veast#fill(arr, value, ...) abort
 endfunction
 
 
+function! veast#pull(arr, ...) abort
+  if a:0 >= 1
+    for i in range(a:0)
+      while 1
+        let idx = index(a:arr, a:000[i])
+        if idx == -1
+          break
+        else
+          call remove(a:arr, idx)
+        endif
+      endwhile
+    endfor
+  else
+    throw 'more than 2 arguments expected'
+  endif
+  return a:arr
+endfunction
+
+
 " vim:sts=2
