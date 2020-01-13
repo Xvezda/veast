@@ -251,4 +251,53 @@ function! veast#pull(arr, ...) abort
 endfunction
 
 
+function! veast#pop(arr, value) abort
+  if !s:is_list(a:arr)
+    throw 'argument `arr` must be type of list'
+  endif
+  let cpy = reverse(deepcopy(a:arr))
+  let idx = 0
+  for i in cpy
+    if i ==# a:value
+      call remove(a:arr, len(cpy[:-2]) - idx)
+      break
+    endif
+    let idx += 1
+  endfor
+endfunction
+
+
+function! veast#poll(arr, value) abort
+  if !s:is_list(a:arr)
+    throw 'argument `arr` must be type of list'
+  endif
+  let cpy = deepcopy(a:arr)
+  let idx = 0
+  for i in cpy
+    if i ==# a:value
+      call remove(a:arr, idx)
+      break
+    endif
+    let idx += 1
+  endfor
+endfunction
+
+
+function! veast#uniq(arr) abort
+  if !s:is_list(a:arr)
+    throw 'argument `arr` must be type of list'
+  endif
+  let cpy = deepcopy(a:arr)
+  let tmp = []
+  for i in cpy
+    if index(tmp, i) == -1
+      call add(tmp, i)
+    else
+      call veast#pop(a:arr, i)
+    endif
+  endfor
+  return a:arr
+endfunction
+
+
 " vim:sts=2

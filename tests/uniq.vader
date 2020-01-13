@@ -1,0 +1,7 @@
+Include: common.vader
+
+Execute (basic unique test):
+  AssertEqual veast#uniq([1, 2, 2]), [1, 2]
+  AssertEqual veast#uniq([2, 1, 2]), [2, 1]
+  AssertEqual veast#uniq([1, 2, 3]), [1, 2, 3]
+  AssertEqual veast#uniq([]), []
