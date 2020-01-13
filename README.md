@@ -3,6 +3,7 @@
 [![Action Status](https://github.com/Xvezda/vim-veast/workflows/Vim%20CI/badge.svg)](https://github.com/Xvezda/vim-veast/actions)
 
 Veast is a library for vim script which highly inspired by [lodash](https://github.com/lodash/lodash) and [underscore](https://github.com/jashkenas/underscore).
+
 It contains useful helper functions, which provides efficient way to writing vim plugins.
 
 
