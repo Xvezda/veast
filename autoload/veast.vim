@@ -300,4 +300,13 @@ function! veast#uniq(arr) abort
 endfunction
 
 
+function! veast#union(...) abort
+  let ret = []
+  for i in range(a:0)
+    let ret = veast#concat(ret, a:000[i])
+  endfor
+  return veast#uniq(ret)
+endfunction
+
+
 " vim:sts=2
