@@ -326,10 +326,8 @@ function! veast#zip(...) abort
     endif
 
     try
-      if !s:is_list(a:000[i])
-        throw 'arguments must be type of list'
-      endif
-      call add(tmp, a:000[i][j])
+      let it = s:iter(a:000[i])
+      call add(tmp, it[j])
     catch /^Vim\%((\a\+)\)\=:E684/  " E684 -> list index out of range
       break
     endtry
