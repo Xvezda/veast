@@ -309,4 +309,36 @@ function! veast#union(...) abort
 endfunction
 
 
+function! veast#zip(...) abort
+  let ret = []
+
+  let i = 0
+  let j = 0
+
+  let tmp = []
+  while 1
+    if i >= a:0
+      call add(ret, tmp)
+      let tmp = []
+
+      let i = 0
+      let j += 1
+    endif
+
+    try
+      if !s:is_list(a:000[i])
+        throw 'arguments must be type of list'
+      endif
+      call add(tmp, a:000[i][j])
+    catch /^Vim\%((\a\+)\)\=:E684/  " E684 -> list index out of range
+      break
+    endtry
+
+    let i += 1
+  endwhile
+
+  return ret
+endfunction
+
+
 " vim:sts=2
