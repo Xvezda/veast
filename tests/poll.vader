@@ -1,0 +1,13 @@
+Include: common.vader
+
+Execute (basic poll test):
+  let arr = [1, 1, 2, 1, 2, 3]
+  call veast#poll(arr, 2)
+  AssertEqual arr, [1, 1, 1, 2, 3]
+
+  let arr = [1, 1, 2, 1, 2, 3]
+  call veast#poll(arr, 1)
+  AssertEqual arr, [1, 2, 1, 2, 3]
+
+Execute (poll exception test):
+  AssertThrows veast#poll(1, 1)
